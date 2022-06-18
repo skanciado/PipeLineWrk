@@ -67,6 +67,7 @@ class OpenshiftClient {
         Configuracio OpenShift del projecte
     */
     private getBuildConfig(String appKey, String sourcePath, String version) {
+        scriptContext.println "appKey: ${scriptContext.env.GIT_URL} URL : ${scriptContext.env.GIT_URL} version: ${version} "
         def bc = [[
             "kind": "BuildConfig",
             "apiVersion": "build.openshift.io/v1",
@@ -107,6 +108,7 @@ class OpenshiftClient {
                 ]
             ]
         ]]
+        scriptContext.println "${bc}"
         return bc
     }
 }
