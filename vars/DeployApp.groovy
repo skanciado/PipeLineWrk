@@ -49,7 +49,21 @@ void call(String project_type, String appKey, String sourcePath = ".", String te
                 }
             }
             */
-            
+            stage("Init") {
+                steps {
+                    script {
+                        info(); 
+                        println "-" * 80
+                        //println "Tipo de proyecto ${params.PROJECT_TYPE}" 
+                        println "Tipo de proyecto ${project_type}" 
+                        println "-" * 80
+                        ocClient = new OpenshiftClient(this) 
+                        emailClient = new EmailClient(this)
+                        sonarScanner = new SonarScanner(this)
+                    }
+                }
+                
+            }
             stage ("Test") {
                 when { 
                     expression{
@@ -83,6 +97,9 @@ void call(String project_type, String appKey, String sourcePath = ".", String te
             }
             stage ("Analysis") {
                 when {
+                    expression{
+                        project_type ==  ProjectTypes.MAVEN || project_type ==   ProjectTypes.DOTNET
+                    }
                     environment name: 'GIT_BRANCH', value: "origin/${Constants.PREPROD_BRANCH}"
                 }
                 steps {
@@ -93,6 +110,9 @@ void call(String project_type, String appKey, String sourcePath = ".", String te
             }
             stage ("Quality Gate") {
                 when {
+                    expression{
+                        project_type ==  ProjectTypes.MAVEN || project_type ==   ProjectTypes.DOTNET
+                    }
                     environment name: 'GIT_BRANCH', value: "origin/${Constants.PREPROD_BRANCH}"
                 }
                 steps {
@@ -101,21 +121,7 @@ void call(String project_type, String appKey, String sourcePath = ".", String te
                     }
                 }
             }
-            stage("Init") {
-                steps {
-                    script {
-                        info(); 
-                        println "-" * 80
-                        //println "Tipo de proyecto ${params.PROJECT_TYPE}" 
-                        println "Tipo de proyecto ${project_type}" 
-                        println "-" * 80
-                        ocClient = new OpenshiftClient(this) 
-                        emailClient = new EmailClient(this)
-                        sonarScanner = new SonarScanner(this)
-                    }
-                }
-                
-            }
+            
             stage ("Build & Publish") {
                 steps {
                     script {
