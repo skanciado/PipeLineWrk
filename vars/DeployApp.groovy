@@ -20,7 +20,7 @@ void call(String project_type, String appKey, String sourcePath = ".", String te
     pipeline {
         
         agent {
-            label project_type == "" ? "MAVEN" : project_type 
+            label project_type == "" ? "MAVEN".toLowerCase() : project_type.toLowerCase()
         }
         options {
             disableConcurrentBuilds()
