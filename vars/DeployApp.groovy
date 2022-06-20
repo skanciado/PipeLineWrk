@@ -55,7 +55,7 @@ void call(String appKey, String sourcePath = ".", String version = "latest", Str
                     script {
                         println "Init Variable Open Shift Client" 
                         ocClient = new OpenshiftClient(this)
-                         println "Init Variable Email Client" 
+                        println "Init Variable Email Client" 
                         emailClient = new EmailClient(this)
                     }
                 }

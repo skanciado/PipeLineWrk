@@ -22,16 +22,22 @@ class OpenshiftClient {
                 def imageStream = scriptContext.openshift.selector('is', appKey)
                 scriptContext.println "Oc build imageStream> ${imageStream.exists()}"
                 if (!imageStream.exists()) {
+                    // Se crea la imagen para que el ConfigBuild no se quede colgado 
+                    //(se queda en estado "new" todo el rato si no està creada la imagen)
                     scriptContext.openshift.create('imagestream', appKey)
                 }
+                // Creacio del Building Config
                 def bcTemplate = this.getBuildConfig(appKey, sourcePath, version)
+                // Creacio del Building Config
                 scriptContext.openshift.create(bcTemplate)
                 def bc = scriptContext.openshift.selector('bc', appKey)
                 scriptContext.println "dc appKey> ${appKey}"
+                // Iniciem el build del BuildingConfig
                 def buildSelector = bc.startBuild() 
                 scriptContext.println "Log Build Selector"
                 buildSelector.logs('-f')
                 String result = buildSelector.object().status.phase
+                // No tengo ni idea porque  (??)
                 bc.delete()
                 if (result == "Failed") {
                     this.scriptContext.println "Build Failed"
@@ -40,12 +46,14 @@ class OpenshiftClient {
             }
         }
     }
-
+    /*
+     Desplegar la aplicacion al OpenShift
+    */
     void deployApp(String appKey) {
         scriptContext.openshift.withCluster() {
-           // println "Oc deploy Project> ${this.projectName}"
+           scriptContext.println "Oc deploy Project> ${this.projectName}"
             scriptContext.openshift.withProject(this.projectName) {
-                   //  println "dc appKey> ${appKey}"
+                   scriptContext.println "dc appKey> ${appKey}"
                     scriptContext.openshift.selector('dc', "${appKey}").rollout().latest()
                     def dc = scriptContext.openshift.selector('dc', "${appKey}")
                     // this will wait until the desired replicas are available
@@ -54,7 +62,7 @@ class OpenshiftClient {
                     // Get App URL to send it via email
                     def route = scriptContext.openshift.selector('route', "${appKey}")  
                     def existRute = route.exists()
-                   // println "Oc Route> ${existRute}"
+                   scriptContext.println "Oc Route> ${existRute}"
                     if (existRute) {
                         def routeObject = route.object()
                         String appUrl = "${routeObject.spec.host}${routeObject.spec.path}"
