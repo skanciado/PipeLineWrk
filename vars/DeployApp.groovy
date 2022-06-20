@@ -67,7 +67,7 @@ void call(String project_type, String appKey, String sourcePath = ".", String te
             stage ("Test") {
                 when { 
                     expression{
-                        project_type ==  ProjectTypes.MAVEN || project_type ==   ProjectTypes.DOTNET
+                       return project_type ==  ProjectTypes.MAVEN || project_type ==   ProjectTypes.DOTNET
                     }
                     anyOf {
                         environment name: 'GIT_BRANCH', value: "origin/${Constants.PROD_BRANCH}"
@@ -98,7 +98,7 @@ void call(String project_type, String appKey, String sourcePath = ".", String te
             stage ("Analysis") {
                 when {
                     expression{
-                        project_type ==  ProjectTypes.MAVEN || project_type ==   ProjectTypes.DOTNET
+                         return  project_type ==  ProjectTypes.MAVEN || project_type ==   ProjectTypes.DOTNET
                     }
                     environment name: 'GIT_BRANCH', value: "origin/${Constants.PREPROD_BRANCH}"
                 }
@@ -111,7 +111,7 @@ void call(String project_type, String appKey, String sourcePath = ".", String te
             stage ("Quality Gate") {
                 when {
                     expression{
-                        project_type ==  ProjectTypes.MAVEN || project_type ==   ProjectTypes.DOTNET
+                         return  project_type ==  ProjectTypes.MAVEN || project_type ==   ProjectTypes.DOTNET
                     }
                     environment name: 'GIT_BRANCH', value: "origin/${Constants.PREPROD_BRANCH}"
                 }
