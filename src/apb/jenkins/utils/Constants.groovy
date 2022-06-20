@@ -9,6 +9,8 @@ class Constants {
     public static final String PREPROD_PROJECT = "preprod"
     public static final String TST_PROJECT = "preprod"
 
+    p
+
     public static final String[] emailList = []//["debora.martin@portdebarcelona.cat", "joan.ferrer@portdebarcelona.cat"]
 
     @NonCPS
