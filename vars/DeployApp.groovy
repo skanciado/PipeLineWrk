@@ -8,9 +8,8 @@ import java.util.HashMap
 void info() {
     println "-" * 80
     println " Info Jenkins Job" 
-    println "-" * 80
-    def config = new HashMap()
-     sh "printenv | sort"      
+    println "-" * 80 
+    sh "printenv | sort"      
     println "-" * 80
     println "-" * 80
 }
@@ -49,7 +48,7 @@ void call(String appKey, String sourcePath = ".", String version = "latest", Str
                 steps {
                     script {
                         info();
-                        println "Init Variable Open Shift Client" 
+                        println "Variable entrada ${params.PROJECT_TYPE}" 
                         ocClient = new OpenshiftClient(this)
                         println "Init Variable Email Client" 
                         emailClient = new EmailClient(this)
