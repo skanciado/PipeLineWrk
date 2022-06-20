@@ -14,13 +14,13 @@ void info() {
     println "-" * 80
 }
 
-void call(String appKey, String sourcePath = ".", String version = "latest", String[] emailList = []) {
+void call(String project_type, String appKey, String sourcePath = ".", String testPath = ".", String version = "latest", String[] emailList = []) {
     OpenshiftClient ocClient
     EmailClient emailClient 
     pipeline {
         
         agent {
-            label "maven"
+            label project_type == "" ? "MAVEN" : project_type 
         }
         options {
             disableConcurrentBuilds()
@@ -48,7 +48,11 @@ void call(String appKey, String sourcePath = ".", String version = "latest", Str
                 steps {
                     script {
                         info();
-                        println "Variable entrada ${params.PROJECT_TYPE}" 
+                        
+                       println "-" * 80
+                       //println "Tipo de proyecto ${params.PROJECT_TYPE}" 
+                       println "Tipo de proyecto ${project_type}" 
+                       println "-" * 80
                         ocClient = new OpenshiftClient(this)
                         println "Init Variable Email Client" 
                         emailClient = new EmailClient(this)
