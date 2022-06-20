@@ -2,6 +2,7 @@ import apb.jenkins.utils.OpenshiftClient
 import apb.jenkins.utils.EmailClient
 import apb.jenkins.utils.Constants
 import java.util.HashMap
+import apb.jenkins.analysis.SonarScanner
 /**
     Metodo para extraer informacion del thread
 */
@@ -17,15 +18,19 @@ void info() {
 void call(String project_type, String appKey, String sourcePath = ".", String testPath = ".", String version = "latest", String[] emailList = []) {
     OpenshiftClient ocClient
     EmailClient emailClient 
+    SonarScanner sonarScanner
     pipeline {
         
         agent {
-            label project_type == "" ? "MAVEN".toLowerCase() : project_type.toLowerCase()
+            label project_type == "" ?  ProjectTypes.MAVEN : project_type.toLowerCase()
         }
         options {
             disableConcurrentBuilds()
         }
         triggers { pollSCM('* * * * *') }
+         environment {
+            MSBUILD_SQ_SCANNER_HOME = tool name: 'sonar-net'
+        }
         stages {
             // TODO Descomentar estas lineas
             /*
@@ -44,18 +49,69 @@ void call(String project_type, String appKey, String sourcePath = ".", String te
                 }
             }
             */
+            
+            stage ("Test") {
+                when { 
+                    expression{
+                        project_type ==  ProjectTypes.MAVEN || project_type ==   ProjectTypes.DOTNET
+                    }
+                    anyOf {
+                        environment name: 'GIT_BRANCH', value: "origin/${Constants.PROD_BRANCH}"
+                        environment name: 'GIT_BRANCH', value: "origin/${Constants.PREPROD_BRANCH}"
+                    }
+                }
+                steps {
+                    script {
+                        dir(testPath) { 
+                            if (project_type ==   ProjectTypes.DOTNET) {
+                                println 'Pruebas NETCORE'
+                                sh "dotnet test --logger trx -r ."
+                                xunit(
+                                [MSTest(deleteOutputFiles: true,
+                                        failIfNotNew: false,
+                                        pattern: '*.trx',
+                                        skipNoTestFiles: true,
+                                        stopProcessingIfError: false)
+                                ])
+                            }else {
+                                 println 'Pruebas JAVA'
+                                //TODO JAVA TEST
+                            }
+                        }
+                    }
+                }
+            }
+            stage ("Analysis") {
+                when {
+                    environment name: 'GIT_BRANCH', value: "origin/${Constants.PREPROD_BRANCH}"
+                }
+                steps {
+                    script {
+                       sonarScanner.run(appKey, sourcePath)
+                    }
+                }
+            }
+            stage ("Quality Gate") {
+                when {
+                    environment name: 'GIT_BRANCH', value: "origin/${Constants.PREPROD_BRANCH}"
+                }
+                steps {
+                    script {
+                       sonarScanner.qualityGate()
+                    }
+                }
+            }
             stage("Init") {
                 steps {
                     script {
-                        info();
-                        
-                       println "-" * 80
-                       //println "Tipo de proyecto ${params.PROJECT_TYPE}" 
-                       println "Tipo de proyecto ${project_type}" 
-                       println "-" * 80
-                        ocClient = new OpenshiftClient(this)
-                        println "Init Variable Email Client" 
+                        info(); 
+                        println "-" * 80
+                        //println "Tipo de proyecto ${params.PROJECT_TYPE}" 
+                        println "Tipo de proyecto ${project_type}" 
+                        println "-" * 80
+                        ocClient = new OpenshiftClient(this) 
                         emailClient = new EmailClient(this)
+                        sonarScanner = new SonarScanner(this)
                     }
                 }
                 

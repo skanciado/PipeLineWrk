@@ -5,7 +5,8 @@ class EmailClient {
     def scriptContext
 
     public EmailClient(def scriptContext) {
-        this.scriptContext = scriptContext
+        this.scriptContext = scriptContext 
+        scriptContext.println "Constructor EmailClient ${projectName}"
     }
 
     public void notifySuccess(String[] emailList) {
