@@ -4,25 +4,21 @@ import apb.jenkins.utils.Constants
 import java.util.HashMap
 /**
     Metodo para extraer informacion del thread
-
+*/
 void info() {
+    println "-" * 80
     println " Info Jenkins Job" 
+    println "-" * 80
     def config = new HashMap()
-    def bindings = getBinding()
-    config.putAll(bindings.getVariables())  
-    // specified variables (in Jenkins job) 
-    println " Bindings " 
-    config.keySet().each { key -> 
-        println key + ": " + config.get(key) 
-    }
-     
-    out.println "-" * 80
-}*/
+     sh "printenv | sort"      
+    println "-" * 80
+    println "-" * 80
+}
 
 void call(String appKey, String sourcePath = ".", String version = "latest", String[] emailList = []) {
     OpenshiftClient ocClient
     EmailClient emailClient
-    //info()
+    info()
     pipeline {
         
         agent {
