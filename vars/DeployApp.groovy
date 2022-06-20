@@ -17,8 +17,7 @@ void info() {
 
 void call(String appKey, String sourcePath = ".", String version = "latest", String[] emailList = []) {
     OpenshiftClient ocClient
-    EmailClient emailClient
-    info()
+    EmailClient emailClient 
     pipeline {
         
         agent {
@@ -49,6 +48,7 @@ void call(String appKey, String sourcePath = ".", String version = "latest", Str
             stage("Init") {
                 steps {
                     script {
+                        info();
                         println "Init Variable Open Shift Client" 
                         ocClient = new OpenshiftClient(this)
                         println "Init Variable Email Client" 
