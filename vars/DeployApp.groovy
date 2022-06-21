@@ -73,13 +73,11 @@ void call(String project_type, String appKey, String sourcePath = ".", String te
                     }
                 }
                 steps {
-                    script {
-                        println "Test steps" 
+                    script { 
                         dir(testPath) { 
                             switch(ProjectTypes[env.PROJECT_TYPE]) { 
                                 case ProjectTypes.MAVEN:
-                                    println 'Pruebas JAVA'
-                                    qaUtils.evalMavenProject(options);
+                                    println 'Pruebas JAVA' 
                                     break;
                                 case ProjectTypes.DOTNET:
                                     println 'Pruebas NETCORE'

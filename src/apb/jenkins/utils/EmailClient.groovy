@@ -1,14 +1,19 @@
 package apb.jenkins.utils
-
+/**
+ Email Client - Clase para notificar por email 
+*/
 class EmailClient {
 
+    // Script Context del PipeLine
     def scriptContext
 
     public EmailClient(def scriptContext) {
         this.scriptContext = scriptContext 
-        scriptContext.println "Constructor EmailClient ${projectName}"
+        scriptContext.println "Constructor EmailClient"
     }
-
+    /**
+    Enviar notificación OK
+    */
     public void notifySuccess(String[] emailList) {
         String [] fullList = Constants.emailList + emailList
         String emails = String.join(",", fullList)
@@ -19,7 +24,9 @@ class EmailClient {
                             attachLog: true,
                             mimeType: "text/html"
     }
-
+    /**
+    Enviar notificación Error
+    */
     public void notifyFail(String[] emailList) {
         String [] fullList = Constants.emailList + emailList
         String emails = String.join(",", fullList)
