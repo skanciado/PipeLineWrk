@@ -12,13 +12,22 @@ class SonarScanner {
         scriptContext.println "Constructor SonarScanner"
     }
 
-    void run(String appKey, String sourcePath) {
+    void run(String appKey, String sourcePath, String  project_Type) {
         scriptContext.env.ANALYSIS_URL = "${this.sonarServerBaseUrl}/dashboard?id=${appKey}"
         scriptContext.dir(sourcePath) {
-            scriptContext.withSonarQubeEnv(this.sonarServer) {
-                scriptContext.sh "dotnet ${scriptContext.env.MSBUILD_SQ_SCANNER_HOME}/SonarScanner.MSBuild.dll begin /k:'${appKey}'"
-                scriptContext.sh "dotnet build"
-                scriptContext.sh "dotnet ${scriptContext.env.MSBUILD_SQ_SCANNER_HOME}/SonarScanner.MSBuild.dll end"
+            switch (project_type) {
+            case ProjectTypes.MAVEN.name():
+                scriptContext.withSonarQubeEnv(this.sonarServer) {
+                    scriptContext.sh "mvn sonar:sonar -Dsonar.projectKey=${appKey} -Dsonar.projectName=${appKey} -Dsonar.languaje=java"
+                } 
+                break;
+            case ProjectTypes.DOTNET.name():
+                scriptContext.withSonarQubeEnv(this.sonarServer) {
+                    scriptContext.sh "dotnet ${scriptContext.env.MSBUILD_SQ_SCANNER_HOME}/SonarScanner.MSBuild.dll begin /k:'${appKey}'"
+                    scriptContext.sh "dotnet build"
+                    scriptContext.sh "dotnet ${scriptContext.env.MSBUILD_SQ_SCANNER_HOME}/SonarScanner.MSBuild.dll end"
+                }
+                break;
             }
         }
     }

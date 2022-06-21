@@ -78,7 +78,9 @@ void call(String project_type, String appKey, String sourcePath = ".", String te
                         dir(testPath) { 
                             switch(env.PROJECT_TYPE) { 
                                 case ProjectTypes.MAVEN.name():
-                                    println 'Pruebas JAVA' 
+                                    println 'Pruebas MAVEN' 
+                                    sh "mvn -B test"
+                                    junit "**/target/**/*.xml"
                                     break;
                                 case ProjectTypes.DOTNET.name():
                                     println 'Pruebas NETCORE'
@@ -111,7 +113,7 @@ void call(String project_type, String appKey, String sourcePath = ".", String te
                                 case ProjectTypes.MAVEN.name(): 
                                 case ProjectTypes.DOTNET.name():
                                     println 'Analysis '
-                                    sonarScanner.run(appKey, sourcePath)
+                                    sonarScanner.run(appKey, sourcePath,env.PROJECT_TYPE)
                                     break; 
                                 default:
                                     println " No hay pruebas pendientes de realizar "
