@@ -1,21 +1,38 @@
-# Jenkins Shared Libraries
+ 
+## Table of Contents
+1. [General Info](#general-info)
+2. [Technologies](#technologies)
+3. [Installation](#installation)
+4. [Collaboration](#collaboration)
+5. [FAQs](#faqs)
+  
+## Collaboration
+  
+## Descripción
+Este PipeLine está creada para ejecutar proyectos 
+* __JAVA__ basados en proyectos Maven
+* __.NET Core__  
+* Despliegue __generico__ basado en DockerFile. 
 
-Shared Libraries de Jenkins para otros proyectos
+El despliegue se realiza en un OpenShift.
 
-Este PipeLine està creada para ejecutar proyectos JAVA basados en proyectos Maven, .NET Core y un despliegue generico basado en DockerFile. El despliegue se realiza en un OpenShift.
-
+## Construcción
 Todos los proyectos que se incluyen en la pipiline deben tener un JenkinsFile , como este: 
-    library('pipeline-common')
-    // Lanzar la pipeline 
+   ```
+   library('pipeline-common')
+   // Lanzar la pipeline 
     DeployApp("DOCKER",  "sensors-52n-sos-2", "images/52n-sos/", ".", "1.0.0", "daniel.horta-vidal@t-systems.com")
+   ```
 
-Donde la libreria "pipeline-common" està registrada en Jenkins. Al ejectura el DeployApp se lanzara la Pipeline. Los parametros de este metodo son los siguientes :
-    * Tipo de proyecto (DOCKER,MAVEN o DOTNET). El tipo de pipeline que se ejecutarà.
-    * Nompre del proyecto. Como se llama el proyecto, es importante definir un nombre que encaje con el ConfigBuild de OpenShift.
-    * SRC. Carpeta fuente del proyecto
-    * Test. Carpeta del proyecto de test
-    * Version. Versión del despliegue de OpenShift
-    * Mails. Lista de correos para ser informados.
+>>> Donde la libreria "pipeline-common" està registrada en Jenkins (General > Ajustes > Librerias Externas.
+
+Al ejectura el DeployApp se lanzara la Pipeline. Los parametros de este metodo son los siguientes :
+* **Tipo de proyecto** (DOCKER,MAVEN o DOTNET). El tipo de pipeline que se ejecutarà.
+* **Nompre del proyecto**. Como se llama el proyecto, es importante definir un nombre que encaje con el ConfigBuild de OpenShift.
+* **SRC**. Carpeta fuente del proyecto
+* **Test**. Carpeta del proyecto de test
+* **Version**. Versión del despliegue de OpenShift
+* **Mails**. Lista de correos para ser informados.
     
 Objetos creados en Jenkins
 * Credenciales de openshift.
@@ -25,16 +42,13 @@ Objetos creados en Jenkins
 
 Plugins necesarios	
 * Ant Adds Apache Ant support to Jenkins 1.13	
-* Apache HttpComponents Client 4.x API Plugin
-Bundles Apache HttpComponents Client 4.x and allows it to be used by Jenkins plugins.
-This plugin is up for adoption! We are looking for new maintainers. Visit our Adopt a Plugin initiative for more information.
-4.5.13-1.0			
+* Apache HttpComponents Client 4.x API Plugin 4.5.13-1.0	
+>> Bundles Apache HttpComponents Client 4.x and allows it to be used by Jenkins plugins.
+>> This plugin is up for adoption! We are looking for new maintainers. Visit our Adopt a Plugin initiative for more information.		
 * Authentication Tokens API Plugin This plugin provides an API for converting credentials into authentication tokens in Jenkins. 1.4		
 * Autofavorite for Blue Ocean Automatically favorites multibranch pipeline jobs when user is the author 1.2.4	
 * Bitbucket Branch Source 
-Allows to use Bitbucket Cloud and Bitbucket Server as sources for multi-branch projects. It also provides the required connectors for Bitbucket Cloud Team and Bitbucket Server Project folder (also known as repositories auto-discovering).
-Warning: The currently installed plugin version may not be safe to use. Please review the following security notices:
-* CSRF vulnerability allows capturing credentials Missing permission checks allow enumerating credentials IDs 734.v2f848c5e6ea2	
+>> Allows to use Bitbucket Cloud and Bitbucket Server as sources for multi-branch projects. It also provides the required connectors for Bitbucket Cloud Team and Bitbucket Server Project folder (also known as repositories auto-discovering).
 * Bitbucket Pipeline for Blue Ocean BlueOcean Bitbucket pipeline creator 1.25.2	
 * Blue Ocean BlueOcean Aggregator 1.25.2	
 * Blue Ocean Core JS  Blue Ocean Core JS Plugin. This plugin is a part of the Blue Ocean Plugin set. 1.25.2	
@@ -45,29 +59,15 @@ Warning: The currently installed plugin version may not be safe to use. Please r
 * Branch API This plugin provides an API for multiple branch based projects. 2.7.0	
 * Caffeine API  Caffeine api plugin for use by other Jenkins plugins. 2.9.2-29.v717aac953ff3	
 * Checks API  This plugin defines an API for Jenkins to publish checks to SCM platforms. 1.7.2		
-* Command Agent Launcher Allows agents to be launched using a specified command. 1.6	
-	
-Common API for Blue Ocean
-This plugin is a part of Blue Ocean UI
-1.25.2	
-	
-Config API for Blue Ocean
-BlueOcean Analytics Tools plugin
-1.25.2	
-	
-Config File Provider
-Ability to provide configuration files (e.g. settings.xml for maven, XML, groovy, custom files,...) loaded through the UI which will be copied to the job workspace.
-3.8.2	
-	
-Configuration as Code
-This plugin allows configuration of Jenkins based on human-readable declarative configuration files.
-Warning: The currently installed plugin version may not be safe to use. Please review the following security notices:
-Non-constant time token comparison
-1.55	
-	
-Configuration as Code Plugin - Groovy Scripting Extension
-Extension for Configuration as Code that allows running Groovy scripts.
-1.1		
+* Command Agent Launcher Allows agents to be launched using a specified command. 1.6		
+* Common API for Blue Ocean This plugin is a part of Blue Ocean UI 1.25.2	
+* Config API for Blue Ocean BlueOcean Analytics Tools plugin 1.25.2	
+* Config File Provider  3.8.2	
+>> Ability to provide configuration files (e.g. settings.xml for maven, XML, groovy, custom files,...) loaded through the UI which will be copied to the job workspace.	
+* Configuration as Code 1.55
+>> This plugin allows configuration of Jenkins based on human-readable declarative configuration files.	
+* Configuration as Code Plugin - Groovy Scripting Extension 1.1
+>>Extension for Configuration as Code that allows running Groovy scripts.		
 	
 Credentials
 This plugin allows you to store credentials in Jenkins.
