@@ -1,6 +1,7 @@
 import apb.jenkins.utils.OpenshiftClient
 import apb.jenkins.utils.EmailClient
 import apb.jenkins.utils.Constants
+import apb.jenkins.utils.ProjectTypes
 import java.util.HashMap
 import apb.jenkins.analysis.SonarScanner
 /**
@@ -22,7 +23,7 @@ void call(String project_type, String appKey, String sourcePath = ".", String te
     pipeline {
         
         agent {
-            label project_type == "" ?  ProjectTypes.MAVEN : project_type.toLowerCase()
+            label project_type == "" ?  ProjectTypes.MAVEN.name() : project_type.toLowerCase()
         }
         options {
             disableConcurrentBuilds()
