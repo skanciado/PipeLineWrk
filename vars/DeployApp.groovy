@@ -30,6 +30,7 @@ void call(String project_type, String appKey, String sourcePath = ".", String te
         triggers { pollSCM('* * * * *') }
          environment {
             MSBUILD_SQ_SCANNER_HOME = tool name: 'sonar-net'
+            PROJECT_TYPE = project_type
         }
         stages {
             // TODO Descomentar estas lineas
@@ -66,8 +67,9 @@ void call(String project_type, String appKey, String sourcePath = ".", String te
             }
             stage ("Test") {
                 when { 
-                    expression{
-                       return project_type ==  ProjectTypes.MAVEN || project_type ==   ProjectTypes.DOTNET
+                    anyOf {
+                        environment name: 'PROJECT_TYPE', value: ProjectTypes.MAVEN
+                        environment name: 'PROJECT_TYPE', value: ProjectTypes.DOTNET
                     }
                     anyOf {
                         environment name: 'GIT_BRANCH', value: "origin/${Constants.PROD_BRANCH}"
@@ -97,8 +99,9 @@ void call(String project_type, String appKey, String sourcePath = ".", String te
             }
             stage ("Analysis") {
                 when {
-                    expression{
-                         return  project_type ==  ProjectTypes.MAVEN || project_type ==   ProjectTypes.DOTNET
+                    anyOf {
+                        environment name: 'PROJECT_TYPE', value: ProjectTypes.MAVEN
+                        environment name: 'PROJECT_TYPE', value: ProjectTypes.DOTNET
                     }
                     environment name: 'GIT_BRANCH', value: "origin/${Constants.PREPROD_BRANCH}"
                 }
@@ -110,8 +113,9 @@ void call(String project_type, String appKey, String sourcePath = ".", String te
             }
             stage ("Quality Gate") {
                 when {
-                    expression{
-                         return  project_type ==  ProjectTypes.MAVEN || project_type ==   ProjectTypes.DOTNET
+                    anyOf {
+                        environment name: 'PROJECT_TYPE', value: ProjectTypes.MAVEN
+                        environment name: 'PROJECT_TYPE', value: ProjectTypes.DOTNET
                     }
                     environment name: 'GIT_BRANCH', value: "origin/${Constants.PREPROD_BRANCH}"
                 }
