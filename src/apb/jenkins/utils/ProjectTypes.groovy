@@ -1,7 +1,8 @@
 package apb.jenkins.utils
 
-enum ProjectTypes {
+public enum ProjectTypes {
     MAVEN ("maven"),
     DOTNET("dotnet"),
     DOCKER("docker")
+     
 }

@@ -75,11 +75,11 @@ void call(String project_type, String appKey, String sourcePath = ".", String te
                 steps {
                     script { 
                         dir(testPath) { 
-                            switch(ProjectTypes[env.PROJECT_TYPE]) { 
-                                case ProjectTypes.MAVEN:
+                            switch(env.PROJECT_TYPE) { 
+                                case ProjectTypes.MAVEN.name():
                                     println 'Pruebas JAVA' 
                                     break;
-                                case ProjectTypes.DOTNET:
+                                case ProjectTypes.DOTNET.name():
                                     println 'Pruebas NETCORE'
                                     sh "dotnet test --logger trx -r ."
                                     xunit(
@@ -106,9 +106,9 @@ void call(String project_type, String appKey, String sourcePath = ".", String te
                 }
                 steps {
                     script {
-                       switch(ProjectTypes[env.PROJECT_TYPE]) { 
-                                case ProjectTypes.MAVEN: 
-                                case ProjectTypes.DOTNET:
+                       switch(env.PROJECT_TYPE) { 
+                                case ProjectTypes.MAVEN.name(): 
+                                case ProjectTypes.DOTNET.name():
                                     println 'Analysis '
                                     sonarScanner.run(appKey, sourcePath)
                                     break; 

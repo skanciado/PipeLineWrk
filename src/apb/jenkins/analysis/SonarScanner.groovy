@@ -8,7 +8,8 @@ class SonarScanner {
     private final String sonarServerBaseUrl = "http://sonarqube-tools-cicd.apps.appdockspro.apb.es"
 
     public SonarScanner(def scriptContext) {
-        this.scriptContext = scriptContext
+        this.scriptContext = scriptContext 
+        scriptContext.println "Constructor SonarScanner"
     }
 
     void run(String appKey, String sourcePath) {
