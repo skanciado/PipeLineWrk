@@ -66,11 +66,7 @@ void call(String project_type, String appKey, String sourcePath = ".", String te
                 
             }
             stage ("Test") {
-                when { 
-                    anyOf {
-                        environment name: 'PROJECT_TYPE', value: ProjectTypes.MAVEN
-                        environment name: 'PROJECT_TYPE', value: ProjectTypes.DOTNET
-                    }
+                when {  
                     anyOf {
                         environment name: 'GIT_BRANCH', value: "origin/${Constants.PROD_BRANCH}"
                         environment name: 'GIT_BRANCH', value: "origin/${Constants.PREPROD_BRANCH}"
@@ -79,44 +75,53 @@ void call(String project_type, String appKey, String sourcePath = ".", String te
                 steps {
                     script {
                         dir(testPath) { 
-                            if (project_type ==   ProjectTypes.DOTNET) {
-                                println 'Pruebas NETCORE'
-                                sh "dotnet test --logger trx -r ."
-                                xunit(
-                                [MSTest(deleteOutputFiles: true,
-                                        failIfNotNew: false,
-                                        pattern: '*.trx',
-                                        skipNoTestFiles: true,
-                                        stopProcessingIfError: false)
-                                ])
-                            }else {
-                                 println 'Pruebas JAVA'
-                                //TODO JAVA TEST
+                            switch(ProjectTypes[env.PROJECT_TYPE]) { 
+                                case ProjectTypes.MAVEN:
+                                    println 'Pruebas JAVA'
+                                    qaUtils.evalMavenProject(options);
+                                    break;
+                                case ProjectTypes.DOTNET:
+                                    println 'Pruebas NETCORE'
+                                    sh "dotnet test --logger trx -r ."
+                                    xunit(
+                                    [MSTest(deleteOutputFiles: true,
+                                            failIfNotNew: false,
+                                            pattern: '*.trx',
+                                            skipNoTestFiles: true,
+                                            stopProcessingIfError: false)
+                                    ])
+                                    break; 
+                                default:
+                                    println " No hay pruebas pendientes de realizar "
+                                    break;
                             }
+                             
                         }
                     }
                 }
             }
             stage ("Analysis") {
                 when {
-                    anyOf {
-                        environment name: 'PROJECT_TYPE', value: ProjectTypes.MAVEN
-                        environment name: 'PROJECT_TYPE', value: ProjectTypes.DOTNET
-                    }
+                    
                     environment name: 'GIT_BRANCH', value: "origin/${Constants.PREPROD_BRANCH}"
                 }
                 steps {
                     script {
-                       sonarScanner.run(appKey, sourcePath)
+                       switch(ProjectTypes[env.PROJECT_TYPE]) { 
+                                case ProjectTypes.MAVEN: 
+                                case ProjectTypes.DOTNET:
+                                    println 'Analysis '
+                                    sonarScanner.run(appKey, sourcePath)
+                                    break; 
+                                default:
+                                    println " No hay pruebas pendientes de realizar "
+                                    break;
+                            }
                     }
                 }
             }
             stage ("Quality Gate") {
-                when {
-                    anyOf {
-                        environment name: 'PROJECT_TYPE', value: ProjectTypes.MAVEN
-                        environment name: 'PROJECT_TYPE', value: ProjectTypes.DOTNET
-                    }
+                when { 
                     environment name: 'GIT_BRANCH', value: "origin/${Constants.PREPROD_BRANCH}"
                 }
                 steps {
