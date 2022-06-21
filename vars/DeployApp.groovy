@@ -30,7 +30,7 @@ void call(String project_type, String appKey, String sourcePath = ".", String te
         triggers { pollSCM('* * * * *') }
          environment {
             MSBUILD_SQ_SCANNER_HOME = tool name: 'sonar-net'
-            PROJECT_TYPE = project_type
+            PROJECT_TYPE = project_type.toLowerCase()
         }
         stages {
             // TODO Descomentar estas lineas
