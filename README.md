@@ -24,75 +24,28 @@ Objetos creados en Jenkins
 * Nodo dotnet (jnlp dotnet tools-cicd/dotnet-slave:latest  ${computer.jnlpmac} ${computer.name})
 
 Plugins necesarios	
-Ant
-Adds Apache Ant support to Jenkins
-1.13	
-	
-Apache HttpComponents Client 4.x API Plugin
+* Ant Adds Apache Ant support to Jenkins 1.13	
+* Apache HttpComponents Client 4.x API Plugin
 Bundles Apache HttpComponents Client 4.x and allows it to be used by Jenkins plugins.
 This plugin is up for adoption! We are looking for new maintainers. Visit our Adopt a Plugin initiative for more information.
-4.5.13-1.0		
-	
-Authentication Tokens API Plugin
-This plugin provides an API for converting credentials into authentication tokens in Jenkins.
-1.4		
-	
-Autofavorite for Blue Ocean
-Automatically favorites multibranch pipeline jobs when user is the author
-1.2.4	
-	
-Bitbucket Branch Source
+4.5.13-1.0			
+* Authentication Tokens API Plugin This plugin provides an API for converting credentials into authentication tokens in Jenkins. 1.4		
+* Autofavorite for Blue Ocean Automatically favorites multibranch pipeline jobs when user is the author 1.2.4	
+* Bitbucket Branch Source 
 Allows to use Bitbucket Cloud and Bitbucket Server as sources for multi-branch projects. It also provides the required connectors for Bitbucket Cloud Team and Bitbucket Server Project folder (also known as repositories auto-discovering).
 Warning: The currently installed plugin version may not be safe to use. Please review the following security notices:
-CSRF vulnerability allows capturing credentials
-Missing permission checks allow enumerating credentials IDs
-734.v2f848c5e6ea2	
-	
-Bitbucket Pipeline for Blue Ocean
-BlueOcean Bitbucket pipeline creator
-1.25.2	
-	
-Blue Ocean
-BlueOcean Aggregator
-Warning: The currently installed plugin version may not be safe to use. Please review the following security notices:
-CSRF vulnerability and missing permission checks
-1.25.2	
-	
-Blue Ocean Core JS
-Blue Ocean Core JS Plugin. This plugin is a part of the Blue Ocean Plugin set.
-1.25.2	
-	
-Blue Ocean Pipeline Editor
-The Blue Ocean Pipeline Editor is the simplest way for anyone wanting to get started with creating Pipelines in Jenkins
-1.25.2	
-	
-Bootstrap 4 API
-Provides Bootstrap 4 for Jenkins plugins.
-4.6.0-3		
-	
-Bootstrap 5 API
-Provides Bootstrap 5 for Jenkins plugins.
-5.1.3-3	
-	
-bouncycastle API
-This plugin provides a stable API to Bouncy Castle related tasks.
-2.25	
-	
-Branch API
-This plugin provides an API for multiple branch based projects.
-2.7.0	
-	
-Caffeine API
-Caffeine api plugin for use by other Jenkins plugins.
-2.9.2-29.v717aac953ff3	
-	
-Checks API
-This plugin defines an API for Jenkins to publish checks to SCM platforms.
-1.7.2		
-	
-Command Agent Launcher
-Allows agents to be launched using a specified command.
-1.6	
+* CSRF vulnerability allows capturing credentials Missing permission checks allow enumerating credentials IDs 734.v2f848c5e6ea2	
+* Bitbucket Pipeline for Blue Ocean BlueOcean Bitbucket pipeline creator 1.25.2	
+* Blue Ocean BlueOcean Aggregator 1.25.2	
+* Blue Ocean Core JS  Blue Ocean Core JS Plugin. This plugin is a part of the Blue Ocean Plugin set. 1.25.2	
+* Blue Ocean Pipeline Editor The Blue Ocean Pipeline Editor is the simplest way for anyone wanting to get started with creating Pipelines in Jenkins 1.25.2	
+* Bootstrap 4 API Provides Bootstrap 4 for Jenkins plugins. 4.6.0-3		
+* Bootstrap 5 API Provides Bootstrap 5 for Jenkins plugins. 5.1.3-3	
+* bouncycastle API This plugin provides a stable API to Bouncy Castle related tasks. 2.25	
+* Branch API This plugin provides an API for multiple branch based projects. 2.7.0	
+* Caffeine API  Caffeine api plugin for use by other Jenkins plugins. 2.9.2-29.v717aac953ff3	
+* Checks API  This plugin defines an API for Jenkins to publish checks to SCM platforms. 1.7.2		
+* Command Agent Launcher Allows agents to be launched using a specified command. 1.6	
 	
 Common API for Blue Ocean
 This plugin is a part of Blue Ocean UI
