@@ -74,6 +74,7 @@ void call(String project_type, String appKey, String sourcePath = ".", String te
                 }
                 steps {
                     script {
+                        println "Test " 
                         dir(testPath) { 
                             switch(ProjectTypes[env.PROJECT_TYPE]) { 
                                 case ProjectTypes.MAVEN:
