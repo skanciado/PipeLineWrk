@@ -66,16 +66,17 @@ void call(String project_type, String appKey, String sourcePath = ".", String te
                         ocClient = new OpenshiftClient(this) 
                         emailClient = new EmailClient(this)
                         sonarScanner = new SonarScanner(this)
-
-                        /*Restore remote package, se descarga todas las librerias remotas*/
-                        switch(env.PROJECT_TYPE) {  
-                            case ProjectTypes.DOTNET.name():
-                                println 'Restore NETCORE'
-                                sh "dotnet restore --configfile NuGet.Config"
-                                break; 
-                            default:
-                                println " Restore no necesarió "
-                                break;
+                        dir(sourcePath) { 
+                            /*Restore remote package, se descarga todas las librerias remotas*/
+                            switch(env.PROJECT_TYPE) {  
+                                case ProjectTypes.DOTNET.name():
+                                    println 'Restore NETCORE'
+                                    sh "dotnet restore --configfile NuGet.Config"
+                                    break; 
+                                default:
+                                    println " Restore no necesarió "
+                                    break;
+                            }
                         }
                     }
                 } 
