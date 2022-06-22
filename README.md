@@ -99,322 +99,86 @@ Al ejectura el DeployApp se lanzara la Pipeline. Los parametros de este metodo s
 * HTML Publisher This plugin publishes HTML reports. 1.28	
 * i18n for Blue Ocean Blue Ocean Internationalization (i18n) Plugin. This plugin is a part of the Blue Ocean Plugin set. 1.25.2	
 * Jackson 2 API This plugin exposes the Jackson 2 JSON APIs to other Jenkins plugins. 2.13.0-230.v59243c64b0a5	
-* Java JSON Web Token (JJWT)
-Bundles the Java JSON Web Token (JJWT) library.0.11.2-9.c8b45b8bb173		 	
-JavaScript GUI Lib: ACE Editor bundle plugin
-JavaScript GUI Lib: ACE Editor bundle plugin.
-1.1		
-	
-* JavaScript GUI Lib: Handlebars bundle plugin
-JavaScript GUI Lib: Handlebars bundle plugin.
-3.0.8		
-	
-* JavaScript GUI Lib: jQuery bundles (jQuery and jQuery UI) plugin
-JavaScript GUI Lib: jQuery bundles (jQuery and jQuery UI) plugin.
-1.2.1		
-	
-* JavaScript GUI Lib: Moment.js bundle plugin
-JavaScript GUI Lib: Moment.js bundle plugin.
-1.1.1		
-	
-* JAXB
-JAXB packaging for more transparent Java 9+ compatibility
-This plugin is up for adoption! We are looking for new maintainers. Visit our Adopt a Plugin initiative for more information.
-2.3.0.1	
-	
-* Jira
-This plugin integrates Jenkins to Atlassian Jira.
-3.6	
-	
-* Job Configuration History
-* Job history plugin for Jenkins.
-2.28.1		
-	
-* Job DSL
-This plugin allows Jobs and Views to be defined via DSLs
-1.78.1	
-	
-* JQuery3 API
-Provides jQuery 3 for Jenkins Plugins. jQuery is a fast, small, and feature-rich JavaScript library.
-3.6.0-2	
-	
-* JSch dependency plugin
-Jenkins plugin that brings the JSch library as a plugin dependency, and provides an SSHAuthenticatorFactory for using JSch with the ssh-credentials plugin.
-0.1.55.2		
-	
-* JUnit
-Allows JUnit-format test results to be published.
-1.53	
-	
-* JWT for Blue Ocean
-BlueOcean JWT plugin: Enables JWT based BlueOcean API authentication
-1.25.2	
-	
-* Kubernetes
-This plugin integrates Jenkins with Kubernetes
-1.31.0	
-	
-* Kubernetes Client API
-Kubernetes Client API plugin for use by other Jenkins plugins.
-5.10.1-171.vaa0774fb8c20	
-	
-* Kubernetes Credentials Plugin
-Common classes for Kubernetes credentials
-0.9.0	
-	
-* Lockable Resources
-This plugin allows to define external resources (such as printers, phones, computers) that can be locked by builds. If a build requires an external resource which is already locked, it will wait for the resource to be free.
-2.12	
-	
-* Mailer
-This plugin allows you to configure email notifications for build results. 
-1.34		
-	
-* MapDB API Plugin
-This plugin provides a shared dependency on the MapDB library so that other plugins can co-operate when using this library.
-1.0.9.0		
-	
-* Matrix Authorization Strategy
-Offers matrix-based security authorization strategies (global and per-project).
-2.6.11	
-	
-* Matrix Project
-Multi-configuration (matrix) project type. 
-1.19	
-	
-* Mercurial
-This plugin integrates Mercurial SCM with Jenkins. It includes repository browsing support for hg serve/hgweb, as well as hosted services like Google Code. Features include guaranteed clean builds, named branch support, module lists, Mercurial tool installation, and automatic caching.
- 
-2.16	
-	
-* Metrics
-This plugin exposes the Metrics API to Jenkins plugins.  
-4.0.2.8	
-	
-* OAuth Credentials plugin
-This plugin provides interfaces for OAuth credentials in Jenkins.
-0.5	
-	
-OkHttp Plugin
-This plugin provides OkHttp for other plugins.
-4.9.3-105.vb96869f8ac3a	
-	
-OpenShift Client
-This plugin provides Jenkins pipeline DSL interactions for OpenShift.
-1.0.35		
-	
-OpenShift Login
-Allows you to log in to Jenkins via OAuth to an OpenShift installation
-1.0.26		
-	
-OpenShift Sync
-Sync your OpenShift BuildConfigs with Jenkins jobs.
-1.0.50	
-	
-Oracle Java SE Development Kit Installer Plugin
-Allows the Oracle Java SE Development Kit (JDK) to be installed via download from Oracle's website.
-1.5	
-	
-OWASP Markup Formatter
-Uses the OWASP Java HTML Sanitizer to allow safe-seeming HTML markup to be entered in project descriptions and the like.
-2.5	
-	
-PAM Authentication
-Adds Unix Pluggable Authentication Module (PAM) support to Jenkins
-1.6.1	
-	
-Personalization for Blue Ocean
-Blue Ocean Personalization
-1.25.2	
-	
-Pipeline Graph Analysis
-Provides a REST API to access pipeline and pipeline run data.
-1.12	
-	
-Pipeline implementation for Blue Ocean
-This plugin is a part of BlueOcean Plugin
-1.25.2	
-	
-Pipeline SCM API for Blue Ocean
-This plugin is a part of BlueOcean Plugin 
-1.25.2	
-	
-Pipeline Utility Steps
-Utility steps for pipeline jobs.
-2.11.0		
-	
-Pipeline: API
-Plugin that defines Pipeline API.
-1105.v3de5e2efac97	
-	
-Pipeline: Basic Steps
-Commonly used steps for Pipelines.
-2.24	
-	
-Pipeline: Build Step
-Adds the Pipeline step build to trigger builds of other jobs. 
-2.15	
-	
-Pipeline: Declarative
-An opinionated, declarative Pipeline.
-1.9.3	
-	
-Pipeline: Declarative Extension Points API
-APIs for extension points used in Declarative Pipelines.
-1.9.3	
-	
-Pipeline: Deprecated Groovy Libraries
-Shared libraries for Pipeline scripts. 552.vd9cc05b8a2e1	
-	
-Pipeline: Groovy
-Pipeline execution engine based on continuation passing style transformation of Groovy scripts. 
-2640.v00e79c8113de	
-	
-Pipeline: Input Step
-Adds the Pipeline step input to wait for human input or approval.
-427.va6441fa17010	
-	
-Pipeline: Job
-Defines a new job type for pipelines and provides their generic user interface.
-2.42	
-	
-Pipeline: Milestone Step
-Plugin that provides the milestone step
-1.3.2	
-	
-Pipeline: Model API
-Model API for Declarative Pipeline.
-1.9.3	
-	
-Pipeline: Multibranch
-Enhances Pipeline plugin to handle branches better by automatically grouping builds from different branches.
- 
-2.26	
-	
-Pipeline: Nodes and Processes
-Pipeline steps locking agents and workspaces, and running external processes that may survive a Jenkins restart or agent reconnection.
-1102.v9c8d2f466adb	
-	
-Pipeline: REST API
-Provides a REST API to access pipeline and pipeline run data.
-2.19	
-	
-Pipeline: SCM Step
-Adds a Pipeline step to check out or update working sources from various SCMs (version control).
-2.13	
-	
-Pipeline: Stage Step
-Adds the Pipeline step stage to delineate portions of a build.
-2.5	
-	
-Pipeline: Stage Tags Metadata
-Library plugin for Pipeline stage tag metadata.
-1.9.3	
-	
-Pipeline: Stage View
-Pipeline Stage View Plugin.
-2.19		
-	
-Pipeline: Step API
-API for asynchronous build step primitive.
-613.v375732a042b1	
-	
-Pipeline: Supporting APIs
-Common utility implementations to build Pipeline Plugin
-3.8	
-	
-Plain Credentials
-Allows use of plain strings and files as credentials.
-1.7		
-	
-Plugin Utilities API
-Provides utility classes that can be used to accelerate plugin development.
-2.6.0	
-	
-Popper.js 2 API
-Provides Popper.js for Jenkins Plugins. Popper can easily position tooltips, popovers or anything else with just a line of code.
-2.10.2-1		
-	
-Popper.js API
-Provides Popper.js for Jenkins plugins.
-1.16.1-2		
-	
-Pub-Sub "light" Bus
-A simple Publish-Subscribe light-weight event bus for Jenkins
-1.16	
-	
-REST API for Blue Ocean
-This plugin is a part of Blue Ocean UI
-1.25.2	
-	
-REST Implementation for Blue Ocean
-This plugin is a part of Blue Ocean UI
-1.25.2	
-	
-Role-based Authorization Strategy
-Enables user authorization using a Role-Based strategy. Roles can be defined globally or for particular jobs or nodes selected by regular expressions.
-This plugin is up for adoption! We are looking for new maintainers. Visit our Adopt a Plugin initiative for more information.
-3.2.0		
-	
-SCM API
-This plugin provides a new enhanced API for interacting with SCM systems.
-2.6.5	
-	
-Script Security
-Allows Jenkins administrators to control what in-process scripts can be run by less-privileged users. 
-1.78	
-	
-Server Sent Events (SSE) Gateway
-Server Sent Events (SSE) Gateway.
-1.24		
-	
-SnakeYAML API
-This plugin provides Snakeyaml for other plugins.
-1.29.1	
-	
-SonarQube Scanner for Jenkins
-This plugin allows an easy integration of SonarQube, the open source platform for Continuous Inspection of code quality.
-2.14	
-	
-SSH Credentials
-Allows storage of SSH credentials in Jenkins
-1.19	
-	
-SSH server
-Adds SSH server functionality to Jenkins, exposing CLI commands through it.
-3.1.0	
-	
-Structs
-Library plugin for DSL plugins that need names for Jenkins objects.
-308.v852b473a2b8c	
-	
-Subversion
- 
-2.15.1	
-	
-Token Macro
-This plug-in adds reusable macro expansion capability for other plug-ins to use.
-267.vcdaea6462991	
-	
-Trilead API
-Trilead API Plugin provides the Trilead library to any dependent plugins in an easily update-able manner.
-1.0.13		
-	
-Variant Plugin
-This user-invisible library plugin allows other multi-modal plugins to behave differently depending on where they run.
-1.4		
-	
-Web for Blue Ocean
-Blue Ocean core
-1.25.2	
-	
-WMI Windows Agents
-Allows you to setup agents on Windows machines over Windows Management Instrumentation (WMI)
- 
-1.8	
-	
-xUnit
-This plugin makes it possible to record xUnit test reports.
-3.0.5	 
+* Java JSON Web Token (JJWT) Bundles the Java JSON Web Token (JJWT) library.0.11.2-9.c8b45b8bb173		 	1.1			
+* JavaScript GUI Lib: Handlebars bundle plugin JavaScript GUI Lib: Handlebars bundle plugin. 3.0.8			
+* JavaScript GUI Lib: jQuery bundles (jQuery and jQuery UI) plugin JavaScript GUI Lib: jQuery bundles (jQuery and jQuery UI) plugin. 1.2.1			
+* JavaScript GUI Lib: Moment.js bundle plugin JavaScript GUI Lib: Moment.js bundle plugin. 1.1.1			
+* JAXB JAXB packaging for more transparent Java 9+ compatibility This plugin is up for adoption! We are looking for new maintainers. Visit our Adopt a Plugin initiative for more information. 2.3.0.1		
+* Jira This plugin integrates Jenkins to Atlassian Jira. 3.6	
+* Job Configuration History 
+* Job history plugin for Jenkins. 2.28.1			
+* Job DSL This plugin allows Jobs and Views to be defined via DSLs 1.78.1	
+* JQuery3 API Provides jQuery 3 for Jenkins Plugins. jQuery is a fast, small, and feature-rich JavaScript library. 3.6.0-2	
+* JSch dependency plugin Jenkins plugin that brings the JSch library as a plugin dependency, and provides an SSHAuthenticatorFactory for using JSch with the ssh-credentials plugin. 0.1.55.2			
+* JUnit Allows JUnit-format test results to be published. 1.53	
+* JWT for Blue Ocean BlueOcean JWT plugin: Enables JWT based BlueOcean API authentication 1.25.2	
+* Kubernetes This plugin integrates Jenkins with Kubernetes 1.31.0	
+* Kubernetes Client API Kubernetes Client API plugin for use by other Jenkins plugins. 5.10.1-171.vaa0774fb8c20	
+* Kubernetes Credentials Plugin  Common classes for Kubernetes credentials 0.9.0		
+* Lockable Resources This plugin allows to define external resources (such as printers, phones, computers) that can be locked by builds. If a build requires an external resource which is already locked, it will wait for the resource to be free. 2.12	
+* Mailer This plugin allows you to configure email notifications for build results. 1.34			
+* MapDB API Plugin This plugin provides a shared dependency on the MapDB library so that other plugins can co-operate when using this library. 1.0.9.0		
+* Matrix Authorization Strategy Offers matrix-based security authorization strategies (global and per-project). 2.6.11		
+* Matrix Project Multi-configuration (matrix) project type.  1.19		
+* Mercurial This plugin integrates Mercurial SCM with Jenkins. It includes repository browsing support for hg serve/hgweb, as well as hosted services like Google Code. Features nclude guaranteed clean builds, named branch support, module lists, Mercurial tool installation, and automatic caching. 2.16	
+* Metrics This plugin exposes the Metrics API to Jenkins plugins.  4.0.2.8		
+* OAuth Credentials plugin This plugin provides interfaces for OAuth credentials in Jenkins. 0.5	
+* OkHttp Plugin This plugin provides OkHttp for other plugins. 4.9.3-105.vb96869f8ac3a		
+* OpenShift Client This plugin provides Jenkins pipeline DSL interactions for OpenShift. 1.0.35			
+* OpenShift Login Allows you to log in to Jenkins via OAuth to an OpenShift installation 1.0.26			
+* OpenShift SyncSync your OpenShift BuildConfigs with Jenkins jobs. 1.0.50		
+* Oracle Java SE Development Kit Installer Plugin Allows the Oracle Java SE Development Kit (JDK) to be installed via download from Oracle's website. 1.5		
+* OWASP Markup Formatter Uses the OWASP Java HTML Sanitizer to allow safe-seeming HTML markup to be entered in project descriptions and the like. 2.5		
+* PAM Authentication Adds Unix Pluggable Authentication Module (PAM) support to Jenkins 1.6.1		
+* Personalization for Blue Ocean Blue Ocean Personalization 1.25.2		
+* Pipeline Graph Analysis Provides a REST API to access pipeline and pipeline run data. 1.12		
+* Pipeline implementation for Blue Ocean This plugin is a part of BlueOcean Plugin 1.25.2		
+* Pipeline SCM API for Blue Ocean This plugin is a part of BlueOcean Plugin  1.25.2		
+* Pipeline Utility Steps Utility steps for pipeline jobs. 2.11.0			
+* Pipeline: API Plugin that defines Pipeline API. 1105.v3de5e2efac97		
+* Pipeline: Basic Steps Commonly used steps for Pipelines. 2.24		
+* Pipeline: Build Step Adds the Pipeline step build to trigger builds of other jobs.  2.15		
+* Pipeline: Declarative An opinionated, declarative Pipeline. 1.9.3		
+* Pipeline: Declarative Extension Points API APIs for extension points used in Declarative Pipelines. 1.9.3		
+* Pipeline: Deprecated Groovy Libraries Shared libraries for Pipeline scripts. 552.vd9cc05b8a2e1	 	
+* Pipeline: Groovy Pipeline execution engine based on continuation passing style transformation of Groovy scripts. 2640.v00e79c8113de		
+* Pipeline: Input Step Adds the Pipeline step input to wait for human input or approval. 427.va6441fa17010		
+* Pipeline: Job Defines a new job type for pipelines and provides their generic user interface. 2.42		
+* Pipeline: Milestone Step Plugin that provides the milestone step 1.3.2		
+* Pipeline: Model API Model API for Declarative Pipeline. 1.9.3	 	
+* Pipeline: Multibranch Enhances Pipeline plugin to handle branches better by automatically grouping builds from different branches. 2.26		
+* Pipeline: Nodes and Processes Pipeline steps locking agents and workspaces, and running external processes that may survive a Jenkins restart or agent reconnection. 1102.* * * v9c8d2f466adb	
+* Pipeline: REST API Provides a REST API to access pipeline and pipeline run data. 2.19		
+* Pipeline: SCM Step Adds a Pipeline step to check out or update working sources from various SCMs (version control). 2.13		
+* Pipeline: Stage Step Adds the Pipeline step stage to delineate portions of a build. 2.5		
+* Pipeline: Stage Tags Metadata
+* Library plugin for Pipeline stage tag metadata. 1.9.3		
+* Pipeline: Stage View Pipeline Stage View Plugin. 2.19			
+* Pipeline: Step API API for asynchronous build step primitive. 613.v375732a042b1		
+* Pipeline: Supporting APIs Common utility implementations to build Pipeline Plugin 3.8		
+* Plain Credentials Allows use of plain strings and files as credentials. 1.7			
+* Plugin Utilities API Provides utility classes that can be used to accelerate plugin development. 2.6.0		
+* Popper.js 2 API
+* Provides Popper.js for Jenkins Plugins. Popper can easily position tooltips, popovers or anything else with just a line of code. 2.10.2-1		
+* Popper.js API Provides Popper.js for Jenkins plugins. 1.16.1-2			
+* Pub-Sub "light" Bus A simple Publish-Subscribe light-weight event bus for Jenkins 1.16		
+* REST API for Blue Ocean This plugin is a part of Blue Ocean UI 1.25.2		
+* REST Implementation for Blue Ocean This plugin is a part of Blue Ocean UI 1.25.2		
+* Role-based Authorization Strategy Enables user authorization using a Role-Based strategy. Roles can be defined globally or for particular jobs or nodes selected by regular * expressions. This plugin is up for adoption! We are looking for new maintainers. Visit our Adopt a Plugin initiative for more information. 3.2.0	
+* SCM API This plugin provides a new enhanced API for interacting with SCM systems. 2.6.5		
+* Script Security Allows Jenkins administrators to control what in-process scripts can be run by less-privileged users.  1.78		
+* Server Sent Events (SSE) Gateway Server Sent Events (SSE) Gateway. 1.24			
+* SnakeYAML API This plugin provides Snakeyaml for other plugins. 1.29.1		
+* SonarQube Scanner for Jenkins This plugin allows an easy integration of SonarQube, the open source platform for Continuous Inspection of code quality. 2.14		
+* SSH Credentials Allows storage of SSH credentials in Jenkins 1.19	 	
+* SSH server Adds SSH server functionality to Jenkins, exposing CLI commands through it. 3.1.0		
+* Structs Library plugin for DSL plugins that need names for Jenkins objects. 308.v852b473a2b8c		
+* Subversion 2.15.1		
+* Token Macro This plug-in adds reusable macro expansion capability for other plug-ins to use. 267.vcdaea6462991	 	
+* Trilead API Trilead API Plugin provides the Trilead library to any dependent plugins in an easily update-able manner. 1.0.13			
+* Variant Plugin This user-invisible library plugin allows other multi-modal plugins to behave differently depending on where they run. 1.4			
+* Web for Blue Ocean Blue Ocean core 1.25.2		
+* WMI Windows Agents Allows you to setup agents on Windows machines over Windows Management Instrumentation (WMI) 1.8		
+* xUnit This plugin makes it possible to record xUnit test reports. 3.0.5	 
 ## Colaboración
   Pipeline realizada por T-Systems, con APB.
