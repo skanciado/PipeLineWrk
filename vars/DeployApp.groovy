@@ -52,37 +52,32 @@ void call(String project_type, String appKey, String sourcePath = ".", String te
             }
             */
             stage("Init") {
+                
                 steps {
                     script {
-                        /*Mostrar Info del Proceso*/
+                         /*Mostrar Info del Proceso*/
                         info(); 
                         println "-" * 80
                         //println "Tipo de proyecto ${params.PROJECT_TYPE}" 
                         println "Tipo de proyecto ${project_type}" 
                         println "-" * 80
-                    }
-                }
-                steps {
-                    script {
+
                         /*Inicializar Variables del proceso */                       
                         ocClient = new OpenshiftClient(this) 
                         emailClient = new EmailClient(this)
                         sonarScanner = new SonarScanner(this)
+
+                        /*Restore remote package, se descarga todas las librerias remotas*/
+                        switch(env.PROJECT_TYPE) {  
+                            case ProjectTypes.DOTNET.name():
+                                println 'Restore NETCORE'
+                                sh "dotnet restore --configfile NuGet.Config"
+                                break; 
+                            default:
+                                println " Restore no necesarió "
+                                break;
+                        }
                     }
-                }
-                steps {
-                      script {
-                            /*Restore remote package, se descarga todas las librerias remotas*/
-                            switch(env.PROJECT_TYPE) {  
-                                case ProjectTypes.DOTNET.name():
-                                    println 'Restore NETCORE'
-                                    sh "dotnet restore --configfile NuGet.Config"
-                                    break; 
-                                default:
-                                    println " Restore no necesarió "
-                                    break;
-                            }
-                      } 
                 } 
                 
             }
