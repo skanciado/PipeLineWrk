@@ -13,7 +13,9 @@ class SonarScanner {
     }
 
     void run(String appKey, String sourcePath, String  project_Type) {
+        scriptContext.println "Run > Analisis > Start "
         scriptContext.env.ANALYSIS_URL = "${this.sonarServerBaseUrl}/dashboard?id=${appKey}"
+        scriptContext.println "URL Analisis ${scriptContext.env.ANALYSIS_URL} "
         scriptContext.dir(sourcePath) {
             switch (project_type) {
             case ProjectTypes.MAVEN.name():
@@ -22,6 +24,7 @@ class SonarScanner {
                 } 
                 break;
             case ProjectTypes.DOTNET.name():
+                scriptContext.println "Run > Analisis > NETCORE "
                 scriptContext.withSonarQubeEnv(this.sonarServer) {
                     scriptContext.sh "dotnet ${scriptContext.env.MSBUILD_SQ_SCANNER_HOME}/SonarScanner.MSBuild.dll begin /k:'${appKey}'"
                     scriptContext.sh "dotnet build"
@@ -30,6 +33,8 @@ class SonarScanner {
                 break;
             }
         }
+        scriptContext.println "Run > Analisis > End "
+     
     }
 
     void qualityGate() {
