@@ -133,15 +133,14 @@ void call(String project_type, String appKey, String sourcePath = ".", String te
                 steps {
                     script {
                        switch(env.PROJECT_TYPE) { 
-                                case ProjectTypes.MAVEN.name(): 
-                                case ProjectTypes.DOTNET.name():
-                                    println 'Analisis DOTNET '
-                                    sonarScanner.run(appKey, sourcePath,env.PROJECT_TYPE)
-                                    break; 
-                                default:
-                                    println " No hay analisis de código"
-                                    break;
-                            }
+                            case ProjectTypes.MAVEN.name(): 
+                            case ProjectTypes.DOTNET.name(): 
+                                sonarScanner.run(appKey, sourcePath, ProjectTypes.DOTNET.name() )
+                                break; 
+                            default:
+                                println " No hay analisis de código"
+                                break;
+                        }
                     }
                 }
             }

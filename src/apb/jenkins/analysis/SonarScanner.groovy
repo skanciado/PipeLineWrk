@@ -17,7 +17,7 @@ class SonarScanner {
         scriptContext.env.ANALYSIS_URL = "${this.sonarServerBaseUrl}/dashboard?id=${appKey}"
         scriptContext.println "URL Analisis ${scriptContext.env.ANALYSIS_URL} "
         scriptContext.dir(sourcePath) {
-            switch (project_type) {
+        switch (scriptContext.env.PROJECT_TYPE) {
             case ProjectTypes.MAVEN.name():
                 scriptContext.withSonarQubeEnv(this.sonarServer) {
                     scriptContext.sh "mvn sonar:sonar -Dsonar.projectKey=${appKey} -Dsonar.projectName=${appKey} -Dsonar.languaje=java"
