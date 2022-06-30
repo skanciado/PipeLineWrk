@@ -93,7 +93,7 @@ class OpenshiftClient {
                     ]
                 ],
                 "strategy": [
-                    "type": "Docker",
+                    "type": "Docker" /*,
                     "dockerStrategy": [
                         "buildArgs": [
                             [
@@ -101,7 +101,7 @@ class OpenshiftClient {
                                 "value": "${version}"
                             ]
                         ]
-                    ]
+                    ]*/
                 ],
                 "source": [
                     "type": "Git",
