@@ -1,0 +1,25 @@
+kind: Service
+apiVersion: v1
+metadata:
+  annotations:
+    description: The app port
+    kubectl.kubernetes.io/last-applied-configuration: >
+      {"apiVersion":"v1","kind":"Service","metadata":{"annotations":{"description":"The
+      app
+      port"},"labels":{"app":"odp-app"},"name":"odp-app","namespace":"preprod"},"spec":{"ports":[{"port":8080,"protocol":"TCP","targetPort":8080}],"selector":{"app":"odp-app","deploymentconfig":"odp-app"},"type":"ClusterIP"}}
+  selfLink: /api/v1/namespaces/preprod/services/odp-app 
+  name: odp-app 
+  labels:
+    app: odp-app
+spec:
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080
+  selector:
+    app: odp-app
+    deploymentconfig: odp-app  
+  type: ClusterIP
+  sessionAffinity: None
+status:
+  loadBalancer: {}

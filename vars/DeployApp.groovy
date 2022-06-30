@@ -162,7 +162,7 @@ void call(String project_type, String appKey, String sourcePath = ".", String te
                         ocClient.buildApp(appKey, sourcePath, version)
                         println "Current build > ${currentBuild.result}"
                         if (currentBuild.result == "FAILURE") {
-                            error("Error en la construcción de la aplicacion en OpenShift")
+                            error("Error en la construcción de la aplicación en OpenShift")
                         }
                     }
                 }

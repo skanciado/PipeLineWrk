@@ -1,0 +1,33 @@
+kind: BuildConfig
+apiVersion: build.openshift.io/v1
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: >
+      {"apiVersion":"build.openshift.io/v1","kind":"BuildConfig","metadata":{"annotations":{},"labels":{"app":"test-app"},"name":"odp-app","namespace":"preprod"},"spec":{"output":{"to":{"kind":"ImageStreamTag","name":"odp-app:latest"}},"source":{"contextDir":"src","git":{"uri":"https://github.com/portdebarcelona/OrdenesDePago.git"},"sourceSecret":{"name":"git-auth"},"type":"Git"},"strategy":{"dockerStrategy":{"dockerfilePath":"APB.APP.ODP/Dockerfile"},"type":"Docker"}}}
+  resourceVersion: '86944370'
+  name: test-app 
+  labels:
+    app: test-app
+spec:
+  nodeSelector: null
+  output:
+    to:
+      kind: ImageStreamTag
+      name: 'test-app:latest'
+  resources: {}
+  successfulBuildsHistoryLimit: 5
+  failedBuildsHistoryLimit: 5
+  strategy:
+    type: Docker
+    dockerStrategy:
+      dockerfilePath: APB.APP.ODP/Dockerfile
+  postCommit: {}
+  source:
+    type: Git
+    git:
+      uri: 'https://github.com/skanciado/OrdenesDePagoWrk'
+    contextDir: src
+    sourceSecret:
+      name: git-auth-temp
+  runPolicy: Serial
+ 
