@@ -15,7 +15,9 @@ void info() {
     println "-" * 80
     println "-" * 80
 }
-
+/*
+Funcion de llamada - Punto de Inicio del PipeLine
+*/
 void call(String project_type, String appKey, String sourcePath = ".", String testPath = ".", String version = "latest", String[] emailList = []) {
     OpenshiftClient ocClient
     EmailClient emailClient 

@@ -1,4 +1,7 @@
 package apb.jenkins.utils 
+/*
+Clase que gestión de las conexiones con OpenShift
+*/
 class OpenshiftClient { 
     // Script Context del PipeLine
     def scriptContext   
@@ -6,6 +9,10 @@ class OpenshiftClient {
     // Nombre del proyecto (namespace)
     String projectName
 
+    /*
+    Constructor de la clase
+    args scriptContext Consola de Jenkins (clase para peticiones associadas a recursos de pipeline)
+    */
     public OpenshiftClient(def scriptContext ) {
         this.scriptContext = scriptContext 
         this.projectName = Constants.getProjectName(scriptContext.env.GIT_BRANCH)
@@ -15,9 +22,9 @@ class OpenshiftClient {
         Contruir el Building Config de la app.
     */
     void buildApp(String appKey, String sourcePath, String version) {
-        scriptContext.println "buildApp > ${appKey} ${sourcePath} ${version}"
+        scriptContext.println "App building > ${appKey} ${sourcePath} ${version}"
         scriptContext.openshift.withCluster() {
-            scriptContext.println "Oc build Project> ${this.projectName}"
+            scriptContext.println " >> App Project > ${this.projectName}"
             scriptContext.openshift.withProject(this.projectName) {
                 def imageStream = scriptContext.openshift.selector('is', appKey)
                 scriptContext.println "Oc build imageStream> ${imageStream.exists()}"
