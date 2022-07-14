@@ -24,7 +24,7 @@ class OpenshiftClient {
     void buildApp(String appKey, String sourcePath, String version) {
         scriptContext.println "App building > ${appKey} ${sourcePath} ${version}"
         scriptContext.openshift.withCluster() {
-            scriptContext.println " >> App Project > ${this.projectName}"
+            scriptContext.println " >> Into the Project > ${this.projectName}"
             scriptContext.openshift.withProject(this.projectName) {
                 def imageStream = scriptContext.openshift.selector('is', appKey)
                 scriptContext.println "Oc build imageStream> ${imageStream.exists()}"
@@ -32,12 +32,19 @@ class OpenshiftClient {
                     // Se crea la imagen para que el ConfigBuild no se quede colgado 
                     //(se queda en estado "new" todo el rato si no està creada la imagen)
                     scriptContext.openshift.create('imagestream', appKey)
-                }
-                // Creacio del Building Config
-                def bcTemplate = this.getBuildConfig(appKey, sourcePath, version)
-                // Creacio del Building Config
-                scriptContext.openshift.create(bcTemplate)
+                }               
                 def bc = scriptContext.openshift.selector('bc', appKey)
+                // Si no existe el BuildingConfig lo creamos
+                if (!bc.exists()) 
+                {
+                     // Creacio del Building Config
+                    def bcTemplate = this.getBuildConfig(appKey, sourcePath, version)
+                    // Creacio del Building Config
+                    scriptContext.openshift.create(bcTemplate)
+                }else {
+                   // Podriamos cambiar la version 
+                }
+                bc = scriptContext.openshift.selector('bc', appKey)
                 scriptContext.println "dc appKey> ${appKey}"
                 // Iniciem el build del BuildingConfig
                 def buildSelector = bc.startBuild() 
