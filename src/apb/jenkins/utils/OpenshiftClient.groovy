@@ -35,22 +35,28 @@ class OpenshiftClient {
                 }               
                 def bc = scriptContext.openshift.selector('bc', appKey)
                 // Si no existe el BuildingConfig lo creamos
-                if (!bc.exists()) 
+                if (bc.exists()) 
                 {
-                     // Creacio del Building Config
-                    def bcTemplate = this.getBuildConfig(appKey, sourcePath, version)
+                    //Borramos el BuildingConfig para evitar que que exista un building apuntando a otro repository no definido por el proceso
+                    bc.delete()
+                 
+                } 
+                scriptContext.println "Oc BuildingConfig no existe"
                     // Creacio del Building Config
-                    scriptContext.openshift.create(bcTemplate)
-                }else {
-                   // Podriamos cambiar la version 
-                }
+                def bcTemplate = this.getBuildConfig(appKey, sourcePath, version)
+                // Creación del Building Config
+                scriptContext.println "Oc BuildingConfig create BuildingConfig"
+                scriptContext.openshift.create(bcTemplate)
+                //
+                bcTemplate.describe()
                 bc = scriptContext.openshift.selector('bc', appKey)
-                scriptContext.println "dc appKey> ${appKey}"
-                // Iniciem el build del BuildingConfig
+                scriptContext.println "startBuild BuildingConfig: ${appKey}"
+                // Iniciamos el build del BuildingConfig
                 def buildSelector = bc.startBuild() 
                 scriptContext.println "Log Build Selector"
                 buildSelector.logs('-f')
                 String result = buildSelector.object().status.phase
+                 this.scriptContext.println "Status Phase : ${result}"
                 // No tengo ni idea porque  (??)
                 bc.delete()
                 if (result == "Failed") {
@@ -95,6 +101,7 @@ class OpenshiftClient {
             "apiVersion": "build.openshift.io/v1",
             "metadata": [
                 "name": "${appKey}",
+                "namespace": "${this.projectName}"
                 "labels": [
                     "app": "${appKey}"
                 ]
