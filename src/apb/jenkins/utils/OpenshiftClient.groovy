@@ -47,8 +47,7 @@ class OpenshiftClient {
                 // Creación del Building Config
                 scriptContext.println "Oc BuildingConfig create BuildingConfig"
                 scriptContext.openshift.create(bcTemplate)
-                //
-                bcTemplate.describe()
+               
                 bc = scriptContext.openshift.selector('bc', appKey)
                 scriptContext.println "startBuild BuildingConfig: ${appKey}"
                 // Iniciamos el build del BuildingConfig
