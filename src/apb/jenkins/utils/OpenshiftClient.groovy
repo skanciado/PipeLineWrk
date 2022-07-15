@@ -101,7 +101,7 @@ class OpenshiftClient {
             "apiVersion": "build.openshift.io/v1",
             "metadata": [
                 "name": "${appKey}",
-                "namespace": "${this.projectName}"
+                "namespace": "${this.projectName}",
                 "labels": [
                     "app": "${appKey}"
                 ]
