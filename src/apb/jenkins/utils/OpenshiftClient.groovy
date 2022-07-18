@@ -82,7 +82,6 @@ class OpenshiftClient {
 
             } 
         }
-}
     }
     /*
      Desplegar la aplicacion al OpenShift
