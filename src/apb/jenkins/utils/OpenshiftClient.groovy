@@ -26,6 +26,7 @@ class OpenshiftClient {
         scriptContext.openshift.withCluster() {
             scriptContext.println " >> Into the Project > ${this.projectName}"
             scriptContext.openshift.withProject(this.projectName) {
+                scriptContext.println "Oc find imageStream"
                 def imageStream = scriptContext.openshift.selector('is', appKey)
                 scriptContext.println "Oc build imageStream> ${imageStream.exists()}"
                 if (!imageStream.exists()) {
@@ -56,7 +57,7 @@ class OpenshiftClient {
                 buildSelector.logs('-f')
                 String result = buildSelector.object().status.phase
                  this.scriptContext.println "Status Phase : ${result}"
-                // No tengo ni idea porque  (??)
+               
                 bc.delete()
                 if (result == "Failed") {
                     this.scriptContext.println "Build Failed"
@@ -64,6 +65,24 @@ class OpenshiftClient {
                 }
             }
         }
+    }
+
+    /*
+     Copiar Imagenes entre Clusters
+    */
+    void copyImage () {
+       
+        scriptContext.withDockerRegistry([credentialsId: "source-credentials", url: "source-registry-url"]) {
+
+            scriptContext.withDockerRegistry([credentialsId: "destination-credentials", url: "destination-registry-url"]) {
+
+                scriptContext.sh """
+                    oc image mirror mysourceregistry.com/myimage:latest mydestinationegistry.com/myimage:latest
+                """
+
+            } 
+        }
+}
     }
     /*
      Desplegar la aplicacion al OpenShift
