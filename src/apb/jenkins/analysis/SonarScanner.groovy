@@ -36,7 +36,7 @@ class SonarScanner {
         scriptContext.println "Run > Analisis > End "
      
     }
-
+    
     void qualityGate() {
         scriptContext.timeout(time: 1, unit: 'HOURS') {
             scriptContext.waitForQualityGate abortPipeline: true

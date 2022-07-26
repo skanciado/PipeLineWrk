@@ -28,6 +28,7 @@ class OpenshiftClient {
             scriptContext.openshift.withProject(this.projectName) {
                 scriptContext.println "Oc find imageStream"
                 def imageStream = scriptContext.openshift.selector('is', appKey)
+                scriptContext.println "Oc find!"
                 scriptContext.println "Oc build imageStream> ${imageStream.exists()}"
                 if (!imageStream.exists()) {
                     // Se crea la imagen para que el ConfigBuild no se quede colgado 
