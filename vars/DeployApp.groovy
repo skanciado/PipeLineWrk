@@ -63,7 +63,7 @@ void call(String project_type, String appKey, String sourcePath = ".", String te
                         //println "Tipo de proyecto ${params.PROJECT_TYPE}" 
                         println "Tipo de proyecto ${project_type}" 
                         println "-" * 80
-
+                        sh "curl http://sonarqube-tools-cicd.apps.appdockspro.apb.es/api/server/version"
                         /*Inicializar Variables del proceso */                       
                         ocClient = new OpenshiftClient(this) 
                         emailClient = new EmailClient(this)
@@ -89,7 +89,7 @@ void call(String project_type, String appKey, String sourcePath = ".", String te
                     anyOf {
                         environment name: 'GIT_BRANCH', value: "origin/${Constants.PROD_BRANCH}"
                         environment name: 'GIT_BRANCH', value: "origin/${Constants.PREPROD_BRANCH}"
-                    }
+                    } 
                 }
                 steps {
                     script { 
@@ -101,7 +101,8 @@ void call(String project_type, String appKey, String sourcePath = ".", String te
                                     junit "**/target/**/*.xml"
                                     break;
                                 case ProjectTypes.DOTNET.name():
-                                    println 'Pruebas NETCORE'
+                                    println 'Pruebas NETCORE' 
+                                   
                                     sh "dotnet test --logger trx -r ."
                                     def files = findFiles(glob: '*.trx') 
                                     if (files.size()>0) {
@@ -152,7 +153,18 @@ void call(String project_type, String appKey, String sourcePath = ".", String te
                 }
                 steps {
                     script {
-                       sonarScanner.qualityGate()
+                        switch(env.PROJECT_TYPE) { 
+                            case ProjectTypes.MAVEN.name():
+                                sonarScanner.qualityGate()
+                                break;
+                            case ProjectTypes.DOTNET.name():
+                                sonarScanner.qualityGate()
+                                break; 
+                            default:
+                                println " Quality Gate"
+                                break;
+                        } 
+                       
                     }
                 }
             }
