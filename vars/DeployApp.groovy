@@ -63,7 +63,7 @@ void call(String project_type, String appKey, String sourcePath = ".", String te
                         //println "Tipo de proyecto ${params.PROJECT_TYPE}" 
                         println "Tipo de proyecto ${project_type}" 
                         println "-" * 80
-                        sh "curl http://sonarqube-tools-cicd.apps.appdockspro.apb.es/api/server/version"
+                        // sh "curl http://sonarqube-tools-cicd.apps.appdockspro.apb.es/api/server/version"
                         /*Inicializar Variables del proceso */                       
                         ocClient = new OpenshiftClient(this) 
                         emailClient = new EmailClient(this)
