@@ -93,37 +93,41 @@ void call(String project_type, String appKey, String sourcePath = ".", String te
                 }
                 steps {
                     script { 
-                        dir(testPath) { 
-                            switch(env.PROJECT_TYPE) { 
-                                case ProjectTypes.MAVEN.name():
-                                    println 'Pruebas MAVEN' 
-                                    sh "mvn -B test"
-                                    junit "**/target/**/*.xml"
-                                    break;
-                                case ProjectTypes.DOTNET.name():
-                                    println 'Pruebas NETCORE' 
-                                   
-                                    sh "dotnet test --logger trx -r ."
-                                    def files = findFiles(glob: '*.trx') 
-                                    if (files.size()>0) {
-                                        echo """ Fichero encontrado:  ${files[0].name} ${files[0].path} ${files[0].directory} ${files[0].length} ${files[0].lastModified}"""                                    
-                                        xunit(
-                                        [MSTest(deleteOutputFiles: true,
-                                                failIfNotNew: false,
-                                                pattern: '*.trx',
-                                                skipNoTestFiles: true,
-                                                stopProcessingIfError: false)
-                                        ])
-                                    }else {
-                                        println 'Pruebas NETCORE no encontradas'
-                                    }
-                                   
-                                    break; 
-                                default:
-                                    println " No hay pruebas de código"
-                                    break;
+                         if (testPath == "." || testPath == "" || testPath == null) {
+                             println 'TestPath no introducido, no hay pruebas a explorar' 
+                        }else {
+                            dir(testPath) { 
+                                switch(env.PROJECT_TYPE) { 
+                                    case ProjectTypes.MAVEN.name():
+                                        println 'Pruebas MAVEN' 
+                                        sh "mvn -B test"
+                                        junit "**/target/**/*.xml"
+                                        break;
+                                    case ProjectTypes.DOTNET.name():
+                                        println 'Pruebas NETCORE' 
+                                    
+                                        sh "dotnet test --logger trx -r ."
+                                        def files = findFiles(glob: '*.trx') 
+                                        if (files.size()>0) {
+                                            echo """ Fichero encontrado:  ${files[0].name} ${files[0].path} ${files[0].directory} ${files[0].length} ${files[0].lastModified}"""                                    
+                                            xunit(
+                                            [MSTest(deleteOutputFiles: true,
+                                                    failIfNotNew: false,
+                                                    pattern: '*.trx',
+                                                    skipNoTestFiles: true,
+                                                    stopProcessingIfError: false)
+                                            ])
+                                        }else {
+                                            println 'Pruebas NETCORE no encontradas'
+                                        }
+                                    
+                                        break; 
+                                    default:
+                                        println " No hay pruebas de código"
+                                        break;
+                                }
+                                
                             }
-                             
                         }
                     }
                 }
